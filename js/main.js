@@ -50,12 +50,12 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Autoplay carousel: dikendalikan sendiri agar tetap berjalan setelah tombol next/prev/indikator ditekan.
+  // AP CAROUSEL
   const carouselEl = document.querySelector('#brandCarousel');
   if (carouselEl) {
     const nextButton = carouselEl.querySelector('[data-bs-slide="next"]');
     const controls = carouselEl.querySelectorAll('[data-bs-slide], [data-bs-slide-to]');
-    // Durasi diambil dari variabel CSS --carousel-interval agar sinkron dengan animasi bar indikator.
+    // DURASI (carousel-interval)
     const cssValue = getComputedStyle(carouselEl).getPropertyValue('--carousel-interval').trim();
     const interval = cssValue.endsWith('ms') ? parseFloat(cssValue) : (parseFloat(cssValue) || 3) * 1000;
 
@@ -73,7 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
       remaining = delay;
       startedAt = Date.now();
       timerId = setTimeout(() => {
-        // Klik programatis memicu handler 'click' di bawah, sehingga timer otomatis di-reset.
+        // CLICK
         if (nextButton) nextButton.click();
         else schedule(interval);
       }, delay);
