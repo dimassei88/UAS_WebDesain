@@ -530,7 +530,7 @@ h3 {
   align-items: center;
   gap: 30px;
   padding: 40px 9%;
-  border-radius: 15px;
+  border-radius: 3px;
 }
 
 .panel-blue {
@@ -592,7 +592,7 @@ h3 {
 }
 
 .brand-carousel {
-  --carousel-interval: 5s; /* samakan dengan data-bs-interval="3000" di index.html */
+  --carousel-interval: 3s; /* samakan dengan data-bs-interval="3000" di index.html */
 }
 
 .brand-carousel .carousel-indicators {
@@ -642,7 +642,7 @@ h3 {
 }
 
 .brand-carousel .carousel-indicators .active::before {
-  animation: indicatorFill var(--carousel-interval, 5s) linear forwards;
+  animation: indicatorFill var(--carousel-interval, 3s) linear forwards;
 }
 
 /* Saat carousel di-hover (Bootstrap menjeda autoplay), bar ikut berhenti */
@@ -1120,7 +1120,7 @@ h3 {
 
 .catalogue-number {
   color: var(--blue);
-  font-size: 13px;
+  font-size: 9px;
   font-weight: 700;
   letter-spacing: 2px;
 }
@@ -2121,4 +2121,245 @@ h3 {
     animation-duration: .01ms !important;
     animation-iteration-count: 1 !important;
   }
+}
+
+/* =========================================================
+   ANIMASI
+   Hanya aktif jika JS berjalan (class .js di <html>) dan
+   pengunjung tidak memilih "reduce motion".
+   ========================================================= */
+
+:root {
+  --ease-out: cubic-bezier(.22, 1, .36, 1);
+}
+
+/* --- Transisi antar halaman --- */
+@keyframes pageIn { from { opacity: 0; } }
+
+body {
+  animation: pageIn .55s ease backwards;
+}
+
+body.is-leaving {
+  opacity: 0;
+  transition: opacity .22s ease;
+}
+
+/* --- Progress bar scroll --- */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 40;
+  width: 100%;
+  height: 3px;
+  background: var(--blue);
+  transform: scaleX(0);
+  transform-origin: left center;
+  pointer-events: none;
+}
+
+/* --- Header & navigasi saat halaman dimuat --- */
+@keyframes headerIn { from { opacity: 0; transform: translateY(-100%); } }
+@keyframes rvUp { from { opacity: 0; transform: translate3d(0, 34px, 0); } }
+
+.site-header {
+  animation: headerIn .8s var(--ease-out) backwards;
+}
+
+.main-nav > a {
+  animation: rvUp .8s var(--ease-out) backwards;
+  animation-delay: calc(.35s + var(--i, 0) * .08s);
+}
+
+.main-nav > a:nth-child(2) { --i: 1; }
+.main-nav > a:nth-child(3) { --i: 2; }
+.main-nav > a:nth-child(4) { --i: 3; }
+
+/* --- Reveal saat scroll --- */
+@keyframes rvLeft  { from { opacity: 0; transform: translate3d(-56px, 0, 0); } }
+@keyframes rvRight { from { opacity: 0; transform: translate3d(56px, 0, 0); } }
+@keyframes rvScale { from { opacity: 0; transform: translate3d(0, 30px, 0) scale(.95); } }
+@keyframes rvFade  { from { opacity: 0; } }
+@keyframes rvCup   { from { opacity: 0; transform: scale(.94); } }
+@keyframes rvStamp {
+  from { opacity: 0; transform: scale(.4) rotate(calc(var(--rot, 0deg) - 50deg)); }
+  60%  { opacity: 1; transform: scale(1.07) rotate(calc(var(--rot, 0deg) + 7deg)); }
+}
+@keyframes bob {
+  50% { transform: translate3d(0, -9px, 0) rotate(var(--rot, 0deg)); }
+}
+
+.js .reveal:not(.in) {
+  opacity: 0;
+}
+
+.reveal.in {
+  animation-duration: .95s;
+  animation-timing-function: var(--ease-out);
+  animation-delay: var(--d, 0s);
+  animation-fill-mode: backwards;
+}
+
+.reveal-up.in    { animation-name: rvUp; }
+.reveal-left.in  { animation-name: rvLeft; }
+.reveal-right.in { animation-name: rvRight; }
+.reveal-scale.in { animation-name: rvScale; }
+.reveal-fade.in  { animation-name: rvFade; }
+.reveal-cup.in   { animation-name: rvCup; animation-duration: 1.7s; animation-timing-function: ease; }
+
+/* Stempel / sticker: muncul memantul lalu melayang pelan */
+.hero-sticker { --rot: 9deg; }
+.page-hero-stamp { --rot: 8deg; }
+.form-hero-note { --rot: -8deg; }
+
+.reveal-stamp.in {
+  animation: rvStamp 1.1s var(--ease-out) var(--d, 0s) backwards,
+             bob 5.5s ease-in-out calc(var(--d, 0s) + 1.4s) infinite;
+}
+
+/* --- Heading dan paragraf: naik per baris --- */
+.js .split:not(.split-ready) {
+  opacity: 0;
+}
+
+.w {
+  display: inline-block;
+  vertical-align: top;
+  overflow: hidden;
+  padding: .08em .08em .16em;
+  margin: -.08em -.08em -.16em;
+}
+
+.wi {
+  display: inline-block;
+}
+
+.split-ready .wi {
+  opacity: 0;
+  transform: translate3d(0, 118%, 0);
+}
+
+.split-ready.in .wi {
+  opacity: 1;
+  transform: none;
+  transition: transform 1.05s var(--ease-out) calc(var(--base, 0s) + var(--l, 0) * .11s),
+              opacity .7s ease calc(var(--base, 0s) + var(--l, 0) * .11s);
+}
+
+/* --- Detail kecil --- */
+.eyebrow-line {
+  transform-origin: left center;
+}
+
+.eyebrow.in .eyebrow-line {
+  animation: lineGrow .9s var(--ease-out) calc(var(--d, 0s) + .25s) backwards;
+}
+
+@keyframes lineGrow { from { transform: scaleX(0); } }
+
+@keyframes pulseDot {
+  0%   { box-shadow: 0 0 0 0 rgba(15,93,206,.4); }
+  100% { box-shadow: 0 0 0 12px rgba(15,93,206,0); }
+}
+
+.note-dot {
+  animation: pulseDot 2.4s ease-out infinite;
+}
+
+@keyframes floaty {
+  50% { transform: translate3d(0, -10px, 0); }
+}
+
+.carousel-panel img,
+.page-hero-image img {
+  animation: floaty 6.5s ease-in-out infinite;
+}
+
+@keyframes drift {
+  50% { transform: translate3d(-22px, -14px, 0); }
+}
+
+.closing-decoration {
+  animation: drift 9s ease-in-out infinite;
+}
+
+/* Gambar katalog: zoom-out halus saat muncul */
+.catalogue-visual {
+  overflow: hidden;
+}
+
+@keyframes imgZoom { from { transform: scale(1.14); } }
+
+.catalogue-visual.in img {
+  animation: imgZoom 1.5s var(--ease-out) var(--d, 0s) backwards;
+}
+
+/* Hasil formulir muncul memantul */
+@keyframes rvPop { from { opacity: 0; transform: translate3d(0, 14px, 0) scale(.98); } }
+
+.form-result:not([hidden]) {
+  animation: rvPop .6s var(--ease-out);
+}
+
+/* --- Hover --- */
+.button span,
+.text-link span,
+.carousel-link span,
+.nav-cta span {
+  display: inline-block;
+  transition: transform .3s var(--ease-out);
+}
+
+.button:hover span,
+.carousel-link:hover span,
+.nav-cta:hover span {
+  transform: translate(3px, -3px);
+}
+
+.text-link:hover span {
+  transform: translateX(5px);
+}
+
+.idea-card {
+  transition: transform .4s var(--ease-out), box-shadow .4s ease;
+}
+
+.idea-card:hover {
+  transform: translateY(-9px);
+  box-shadow: 0 22px 40px rgba(20,20,40,.14);
+}
+
+.idea-symbol {
+  display: inline-block;
+  transition: transform .5s var(--ease-out);
+}
+
+.idea-card:hover .idea-symbol {
+  transform: rotate(-12deg) scale(1.15);
+}
+
+.process-item {
+  transition: padding-left .4s var(--ease-out);
+}
+
+.process-item:hover {
+  padding-left: 12px;
+}
+
+.process-symbol {
+  display: inline-block;
+  transition: transform .45s var(--ease-out);
+}
+
+.process-item:hover .process-symbol {
+  transform: rotate(90deg);
+}
+
+.spec-list > div {
+  transition: padding-left .35s var(--ease-out);
+}
+
+.spec-list > div:hover {
+  padding-left: 8px;
 }

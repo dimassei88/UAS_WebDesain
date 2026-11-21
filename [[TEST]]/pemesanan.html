@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8"><script>document.documentElement.classList.add("js")</script><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Kirim kebutuhan kemasan dan konsultasikan pesanan custom bersama Unipack.">
+  <title>Konsultasi & Pemesanan — Unipack</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@6.0.0-alpha.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-B/GM4XqrwHnWXNOWMbloTmrYXZg10cakYGmpfsR/bbzQ6JAJI4ihuyADKLnBgrCe" crossorigin="anonymous">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="site-header"><div class="site-container nav-wrap">
+    <a class="brand" href="index.html" aria-label="Unipack — Leave Your Mark"><span class="brand-type"><img src="assets/unipack-logotype.svg" alt=""></span><img class="brand-mark" src="assets/unipack-logogram.svg" alt="Unipack"></a>
+    <button class="menu-toggle" type="button" aria-label="Buka menu navigasi" aria-expanded="false" aria-controls="primaryNavigation"><span></span><span></span></button>
+    <nav class="main-nav" id="primaryNavigation" aria-label="Navigasi utama"><a href="index.html">Beranda</a><a href="produk.html">Produk</a><a href="profil.html">Profil</a><a class="nav-cta active" href="pemesanan.html" aria-current="page">Konsultasi <span>↗</span></a></nav>
+  </div></header>
+  <main>
+    <section class="page-hero page-hero-blue form-hero"><div class="site-container page-hero-grid"><div><p class="eyebrow"><span class="eyebrow-line"></span> LET'S TALK PACKAGING</p><h1>Ceritakan<br>kebutuhan <em>brand-mu.</em></h1><p class="page-lead">Isi formulir berikut sebagai langkah awal konsultasi. Informasi yang kamu berikan membantu kami memahami kebutuhan kemasanmu.</p></div><div class="form-hero-note"><span>YOUR IDEA</span><strong>↓</strong><span>OUR DISCUSSION</span></div></div></section>
+    <section class="order-section section-pad"><div class="site-container order-grid">
+      <div class="form-intro"><p class="eyebrow">PROJECT INQUIRY / 01</p><h2>Mulai dari<br>rencana <em>kecil.</em></h2><p>Berikan detail dasar produk dan kebutuhanmu. Untuk tahap produksi, spesifikasi akhir, harga, dan jadwal akan dikonfirmasi melalui konsultasi.</p><div class="form-help-card"><span class="help-icon">i</span><div><strong>Perlu menyiapkan desain?</strong><p>Siapkan logo atau konsep visual brand agar pembahasan personalisasi kemasan lebih mudah.</p></div></div><div class="form-contact-note"><span class="note-dot"></span> Formulir ini merupakan demo front-end untuk proyek UAS.</div></div>
+      <form class="order-form" id="orderForm">
+        <div class="form-topline"><span>FORMULIR KONSULTASI</span><span>01 — 04</span></div>
+        <div class="form-row-two">
+          <div class="field-group"><label for="customerName">Nama lengkap <span>*</span></label><input id="customerName" name="customerName" type="text" placeholder="Nama kamu" required minlength="2"></div>
+          <div class="field-group"><label for="businessName">Nama usaha / brand <span>*</span></label><input id="businessName" name="businessName" type="text" placeholder="Nama brand" required></div>
+        </div>
+        <div class="form-row-two">
+          <div class="field-group"><label for="phone">Nomor WhatsApp <span>*</span></label><input id="phone" name="phone" type="tel" placeholder="08xxxxxxxxxx" required pattern="[0-9+() -]{8,18}" title="Masukkan nomor telepon yang valid"></div>
+          <div class="field-group"><label for="email">Email</label><input id="email" name="email" type="email" placeholder="nama@email.com"></div>
+        </div>
+        <div class="field-group"><label for="productType">Produk yang dibutuhkan <span>*</span></label><select id="productType" name="productType" required><option value="" selected disabled>Pilih kategori produk</option><option>Cup Plastik PP</option><option>Cup Plastik PET</option><option>Cup Plastik Injection</option><option>Paper Cup</option><option>Paper Bowl</option><option>Lunch Box / Food Tray</option><option>Paperbag / Sosbag</option><option>Masih ingin konsultasi</option></select></div>
+        <div class="form-row-two">
+          <div class="field-group"><label for="size">Ukuran / kapasitas</label><input id="size" name="size" type="text" placeholder="Contoh: 16 oz"></div>
+          <div class="field-group"><label for="quantity">Perkiraan jumlah</label><select id="quantity" name="quantity"><option value="Belum ditentukan">Belum ditentukan</option><option>Di bawah 500 pcs</option><option>500–1.000 pcs</option><option>1.000–5.000 pcs</option><option>Di atas 5.000 pcs</option></select></div>
+        </div>
+        <div class="field-group"><label for="details">Ceritakan kebutuhanmu <span>*</span></label><textarea id="details" name="details" rows="5" placeholder="Jelaskan jenis usaha, kebutuhan desain, atau pertanyaan yang ingin didiskusikan..." required minlength="10"></textarea></div>
+        <label class="check-field"><input type="checkbox" id="agreement" required><span>Saya memastikan informasi yang diisi sudah benar.</span></label>
+        <button class="button button-primary form-submit" type="submit">Kirim permintaan <span>↗</span></button>
+        <p class="form-disclaimer">* Kolom wajib diisi. Demo ini menampilkan ringkasan permintaan di halaman dan belum mengirim data ke server.</p>
+        <div class="form-result" id="formResult" role="status" aria-live="polite" hidden></div>
+      </form>
+    </div></section>
+    <section class="mini-cta"><div class="site-container mini-cta-inner"><div><p class="eyebrow">NEED MORE INFORMATION?</p><h2>Lihat jenis kemasan<br>yang tersedia.</h2></div><a class="button button-primary" href="produk.html">Jelajahi produk <span>↗</span></a></div></section>
+  </main>
+  <footer class="site-footer"><div class="site-container footer-main"><a class="brand brand-footer" href="index.html" aria-label="Unipack — Leave Your Mark"><img class="brand-logo brand-logo-light" src="assets/unipack-logo-horizontal-white.svg" alt="UNIPACK — Leave Your Mark"></a><p>Kemasan yang mendukung cerita dan identitas setiap brand.</p><div class="footer-links"><a href="produk.html">Produk</a><a href="profil.html">Profil</a><a href="pemesanan.html">Pemesanan</a></div></div><div class="site-container footer-bottom"><span>© 2026 UNIPACK — KONSEP WEBSITE CV BERSAMA JAYA</span><span>MALANG, INDONESIA</span></div></footer>
+  <script src="js/main.js"></script><script type="module" src="https://cdn.jsdelivr.net/npm/bootstrap@6.0.0-alpha.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-1a/pXj49ZQ1aHEmrJ+gMw1otqoVsYwlEnlD8mIfY2TV03r20Y0CN7uqx1tQogjPL" crossorigin="anonymous"></script>
+</body></html>
